@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa"
 
 export function Footer() {
@@ -9,9 +10,13 @@ export function Footer() {
           {/* About Section */}
           <div>
             <div className="mb-4 flex items-center space-x-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                <span className="text-xl font-bold text-primary-foreground">BF</span>
-              </div>
+              <Image
+                src="/bg-bridgefort-community-outreach.jpeg"
+                alt="BridgeFort Community Outreach logo"
+                width={40}
+                height={40}
+                className="rounded-lg object-cover"
+              />
               <span className="font-semibold text-foreground">BridgeFort</span>
             </div>
             <p className="text-pretty text-sm text-muted-foreground leading-relaxed">

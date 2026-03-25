@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
@@ -17,14 +18,18 @@ export function Navigation() {
   ]
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-              <span className="text-xl font-bold text-primary-foreground">BF</span>
-            </div>
+            <Image
+              src="/bg-bridgefort-community-outreach.jpeg"
+              alt="BridgeFort Community Outreach logo"
+              width={40}
+              height={40}
+              className="rounded-lg object-cover"
+            />
             <span className="hidden font-semibold text-foreground sm:inline-block">BridgeFort Community Outreach</span>
             <span className="font-semibold text-foreground sm:hidden">BridgeFort</span>
           </Link>
