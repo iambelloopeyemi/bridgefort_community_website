@@ -12,23 +12,42 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [subject, setSubject] = useState("")
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const form = e.target as HTMLFormElement
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      subject,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    }
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      const form = e.target as HTMLFormElement
-      form.reset()
-    }, 3000)
+    if (res.ok) {
+      setIsSubmitting(false)
+      setIsSubmitted(true)
+      setTimeout(() => {
+        setIsSubmitted(false)
+        setSubject("")
+        form.reset()
+      }, 3000)
+    } else {
+      const { error: errMsg } = await res.json()
+      setError(errMsg || "Something went wrong. Please try again.")
+      setIsSubmitting(false)
+    }
   }
 
   if (isSubmitted) {
@@ -75,7 +94,7 @@ export function ContactForm() {
         <Label htmlFor="subject">
           Subject <span className="text-destructive">*</span>
         </Label>
-        <Select name="subject" required>
+        <Select name="subject" required value={subject} onValueChange={setSubject}>
           <SelectTrigger id="subject">
             <SelectValue placeholder="Select a subject" />
           </SelectTrigger>
@@ -102,6 +121,7 @@ export function ContactForm() {
         />
       </div>
 
+      {error && <p className="text-sm text-destructive">{error}</p>}
       <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={isSubmitting}>
         {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
