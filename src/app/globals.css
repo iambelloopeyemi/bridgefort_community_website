@@ -16,7 +16,7 @@
   --secondary: oklch(0.68 0.17 145);           /* fresh green #4CAF50 */
   --secondary-foreground: oklch(1 0 0);
   --muted: oklch(0.975 0.004 248);             /* light grey #F5F7FA */
-  --muted-foreground: oklch(0.55 0 0);         /* medium grey */
+  --muted-foreground: oklch(0.55 0 0);
   --accent: oklch(0.73 0.17 52);               /* warm orange #F7941D */
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
