@@ -17,7 +17,6 @@ export function Footer() {
                 height={40}
                 className="rounded-lg object-cover"
               />
-              <span className="font-semibold text-foreground">BridgeFort</span>
             </div>
             <p className="text-pretty text-sm text-muted-foreground leading-relaxed">
               Creating safe spaces and providing support services for underserved communities.

@@ -30,8 +30,6 @@ export function Navigation() {
               height={40}
               className="rounded-lg object-cover"
             />
-            <span className="hidden font-semibold text-foreground sm:inline-block">BridgeFort Community Outreach</span>
-            <span className="font-semibold text-foreground sm:hidden">BridgeFort</span>
           </Link>
 
           {/* Desktop Navigation */}
